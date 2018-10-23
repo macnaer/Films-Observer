@@ -1,0 +1,23 @@
+{
+  "name": "films-observer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/macnaer/Films-Observer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/macnaer/Films-Observer/issues"
+  },
+  "homepage": "https://github.com/macnaer/Films-Observer#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
