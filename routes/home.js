@@ -1,13 +1,9 @@
 const fs = require("fs");
 const path = require("path");
+const Render = require("../modules/render");
 
 function Home(req, res) {
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "text/html");
-  const stream = fs.createReadStream(
-    path.join(__dirname, "..", "public", "index.html")
-  );
-  stream.pipe(res);
+  Render(req, res, "index.html");
 }
 
 module.exports = Home;
