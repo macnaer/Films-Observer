@@ -1,25 +1,26 @@
 const fs = require("fs");
 const path = require("path");
 const Request = require('../modules/request');
+const Render = require('../modules/render');
 const url = require('url');
 
 function Search(req, res) {
   const parsedUrl = url.parse(req.url, true);
-  console.log(`req ${req}`);
   const title = parsedUrl.query.title;
   console.log(title);
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/html');
 
   Request(title, (error, movie) => {
-    if (error) throw error;
-    // console.log(movie);
-  })
 
-  const stream = fs.createReadStream(
-    path.join(__dirname, "..", "views", 'movie.html')
-  );
-  stream.pipe(res);
+    Render('movie.html', movie, (error, html) => {
+      if (error) {
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end(res.message);
+      };
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'text/html');
+      res.end(html);
+    })
+  })
 }
 
 module.exports = Search;
