@@ -1,13 +1,16 @@
 const fs = require("fs");
 const path = require("path");
 
-function Render(req, res, template, data) {
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "text/html");
-  const stream = fs.createReadStream(
-    path.join(__dirname, "..", "public", template)
-  );
-  stream.pipe(res);
+function Render(template, data, callback) {
+  fs.readFile(path.resolve('views', template), 'utf-8', (error, template) => {
+    if (error) return callback(error);
+    if (!data) return template;
+
+    const content = template.replace(/{{([^{}]*)}}/g, (place, props) =>{
+      const math = data[props];
+      return math || place;
+    })
+  })
 }
 
 module.exports = Render;

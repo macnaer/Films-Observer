@@ -1,16 +1,25 @@
 const fs = require("fs");
 const path = require("path");
-const Render = require("../modules/render");
-const axios = require("axios");
-const api = require("../modules/api");
+const Request = require('../modules/request');
+const url = require('url');
 
 function Search(req, res) {
-  axios
-    .get("http://www.omdbapi.com/?t=terminator" + `&apikey=${api.apiKey}`)
-    .then(data => {
-      Render(req, res, "movie.html", data);
-    })
-    .catch(e => console.log(e));
+  const parsedUrl = url.parse(req.url, true);
+  console.log(`req ${req}`);
+  const title = parsedUrl.query.title;
+  console.log(title);
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/html');
+
+  Request(title, (error, movie) => {
+    if (error) throw error;
+    // console.log(movie);
+  })
+
+  const stream = fs.createReadStream(
+    path.join(__dirname, "..", "views", 'movie.html')
+  );
+  stream.pipe(res);
 }
 
 module.exports = Search;
