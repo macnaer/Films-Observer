@@ -48,13 +48,14 @@
   }
   #mainNav .navbar-brand {
     padding: .5rem 0;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.5);
   }
+ 
   #mainNav .nav-link {
     -webkit-transition: none;
     transition: none;
     padding: 2rem 1.5rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.5);
   }
   #mainNav .nav-link:hover {
     color: rgba(255, 255, 255, 0.75);
@@ -305,3 +306,14 @@ a:focus, a:hover {
 footer {
   padding: 5rem 0;
 }
+  .main{
+    height: 70px;
+    margin-bottom: 100px;
+  }
+.result{
+    text-align: left;
+    display: inline-block;
+  }
+  .result ul li{
+    list-style: none;
+  }
